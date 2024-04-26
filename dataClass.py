@@ -52,7 +52,9 @@ class DataProcessor:
         return user_preference_vectors
 
 
-    def create_preference_vectors_given_bounds(self, top_users, top_items):
+    def create_preference_vectors_given_bounds(self, top_users1, top_items1):
+        top_items = self.df['Item'].value_counts().nlargest(top_items1).index
+        top_users = self.df['User'].value_counts().nlargest(top_users1).index
         # Filter data to include only the top most frequently rated items
         filtered_df = self.df[self.df['Item'].isin(top_items)]
 
@@ -68,7 +70,7 @@ class DataProcessor:
         return user_preference_vectors
 
 # Usage
-processor = DataProcessor('../Dataset.csv')
+# processor = DataProcessor('../Dataset.csv')
 
 # Exaple preference vectors with bounds to lower the error margin
 # top_items = df['Item'].value_counts().nlargest(1000).index
