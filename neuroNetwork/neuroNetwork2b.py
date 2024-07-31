@@ -1,5 +1,9 @@
-import pandas as pd
 from dataClass import DataProcessor
+import numpy as np
+from sklearn.neighbors import NearestNeighbors
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from sklearn.model_selection import train_test_split
 
 # Load the CSV file
 
@@ -9,18 +13,6 @@ user_preference_vectors = data.create_preference_vectors_given_bounds(2000, 2000
 
 # Show the transformed DataFrame
 print(user_preference_vectors.head())
-
-# jaccard_distances = compute_all_jaccard_distances(user_preference_vectors)
-#
-# # Print the Jaccard distances for the first 5 pairs of users
-#
-# for (user_id_u, user_id_v), distance in list(jaccard_distances.items())[:5]:
-#     print(f"Jaccard distance between User {user_id_u} and User {user_id_v}: {distance}")
-import numpy as np
-from sklearn.neighbors import NearestNeighbors
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from sklearn.model_selection import train_test_split
 
 # Identify k-nearest neighbors within the same cluster for each user
 def identify_neighbors(user_preference_vectors, k):
