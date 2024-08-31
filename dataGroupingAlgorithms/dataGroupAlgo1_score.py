@@ -9,7 +9,7 @@ from dataClass import DataProcessor
 
 data = DataProcessor('../Dataset.csv')
 
-user_preference_vectors = data.create_preference_vectors_given_bounds(2000, 2000)
+user_preference_vectors = data.create_preference_vectors_given_bounds(25000, 25000)
 
 
 # Show the transformed DataFrame

@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 
 data = DataProcessor('../Dataset.csv')
 
-user_preference_vectors = data.create_preference_vectors_given_bounds(2000, 2000)
+user_preference_vectors = data.create_preference_vectors_given_bounds(11000, 11000)
 
 # Show the transformed DataFrame
 print(user_preference_vectors.head())
@@ -25,14 +25,17 @@ def identify_neighbors(user_preference_vectors, k):
 
 # Construct feature vectors for each user
 def construct_feature_vectors(user_preference_vectors, indices):
-    feature_vectors = np.array([user_preference_vectors.iloc[indices[i]].values.flatten() for i in range(len(indices))])
+    feature_vectors = (
+        np.array([user_preference_vectors.iloc[indices[i]].values.flatten()
+                  for i in range(len(indices))]))
 
     return feature_vectors
 
 # Define and train a neural network for each cluster
 def train_neural_network(feature_vectors, target_vectors):
     # Split the data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(feature_vectors, target_vectors, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = (
+        train_test_split(feature_vectors, target_vectors, test_size=0.2, random_state=42))
 
     # Define the neural network
     model = Sequential()
